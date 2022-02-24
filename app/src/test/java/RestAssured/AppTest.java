@@ -32,7 +32,8 @@ public class AppTest {
     @Test
     public void testCriarUsuario(){
         given().
-                body("{\"name\": \"diogo\",\"job\": \"QA\"}").
+                contentType(ContentType.JSON).
+                body("{\"name\": \"diogo\",\"job\": \"leader\"}").
         when().
                 post("https://reqres.in/api/users").
         then().

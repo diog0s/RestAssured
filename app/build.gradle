@@ -25,12 +25,10 @@ dependencies {
 
     //Dependencia RestAssured
     testImplementation 'io.rest-assured:rest-assured:4.5.1'
+
 }
 
 application {
     // Define the main class for the application.
     mainClass = 'RestAssured.App'
-}
-test {
-    useJUnitPlatform()
 }
