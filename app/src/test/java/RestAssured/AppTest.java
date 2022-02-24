@@ -4,11 +4,20 @@
 package RestAssured;
 
 import org.junit.Test;
+
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test
+    public void testDadosDoUsuario() {
+        when().
+                get("https://reqres.in/api/users?page=2").
+        then()
+                .statusCode(200)
+                .body("page", is(2))
+                .body("total", is(12))
+                .body("data[0].first_name", is("Michael"));
     }
 }
