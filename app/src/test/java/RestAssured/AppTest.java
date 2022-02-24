@@ -3,10 +3,14 @@
  */
 package RestAssured;
 
+import io.restassured.http.ContentType;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
 
 public class AppTest {
@@ -14,10 +18,19 @@ public class AppTest {
     public void testDadosDoUsuario() {
         when().
                 get("https://reqres.in/api/users?page=2").
-        then()
-                .statusCode(200)
-                .body("page", is(2))
-                .body("total", is(12))
-                .body("data[0].first_name", is("Michael"));
+        then().
+                statusCode(HttpStatus.SC_OK).
+                body("page", is(2)).
+                body("data", is(notNullValue()));
+    }
+    @Test
+    public void testCriarUsuario(){
+        given().log().all().
+                contentType(ContentType.JSON).
+                body("{\"name\": \"diogo\",\"job\": \"QA\"}").
+        when().
+                post("https://reqres.in/api/users").
+        then().
+                statusCode(HttpStatus.SC_CREATED).body("name", is("diogo"));
     }
 }
