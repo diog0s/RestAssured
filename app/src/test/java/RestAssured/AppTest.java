@@ -3,8 +3,10 @@
  */
 package RestAssured;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -14,6 +16,10 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
 
 public class AppTest {
+    @BeforeClass
+    public static void setup(){
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
     @Test
     public void testDadosDoUsuario() {
         when().
@@ -25,8 +31,7 @@ public class AppTest {
     }
     @Test
     public void testCriarUsuario(){
-        given().log().all().
-                contentType(ContentType.JSON).
+        given().
                 body("{\"name\": \"diogo\",\"job\": \"QA\"}").
         when().
                 post("https://reqres.in/api/users").
