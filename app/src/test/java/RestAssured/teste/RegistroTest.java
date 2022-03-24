@@ -11,6 +11,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.core.Is.is;
 
 public class RegistroTest extends BaseTest{
+    private static final String REGISTRA_USUARIO_ENDPOINT = "/register";
 
 
     @Test
@@ -20,7 +21,7 @@ public class RegistroTest extends BaseTest{
         given().
                 contentType(ContentType.JSON).
                 body(usuario).
-        post("/register").
+        post(REGISTRA_USUARIO_ENDPOINT).
         then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body("error", is("Missing password"));

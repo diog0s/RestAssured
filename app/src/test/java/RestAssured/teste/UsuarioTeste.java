@@ -4,23 +4,23 @@
 package RestAssured.teste;
 
 import RestAssured.dominio.Usuario;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class UsuarioTeste extends BaseTest{
+    private static final String LISTA_USUARIOS_ENDPOINT = "/users";
+    private static final String CRIA_USUARIO_ENDPOINT = "/user";
 
     @Test
     public void testDadosDoUsuario() {
         given().params("page", "2").
         when().
-                get("/users").
+                get(LISTA_USUARIOS_ENDPOINT).
         then().
                 statusCode(HttpStatus.SC_OK).
                 body("page", is(2)).
@@ -33,7 +33,7 @@ public class UsuarioTeste extends BaseTest{
                 contentType(ContentType.JSON).
                 body(usuario).
         when().
-                post("/user").
+                post(CRIA_USUARIO_ENDPOINT).
         then().
                 statusCode(HttpStatus.SC_CREATED).
                 body("name", is("diogo"));
