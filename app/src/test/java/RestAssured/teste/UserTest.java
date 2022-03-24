@@ -3,7 +3,7 @@
  */
 package RestAssured.teste;
 
-import RestAssured.dominio.Usuario;
+import RestAssured.dominio.User;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
@@ -12,28 +12,28 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-public class UsuarioTeste extends BaseTest{
-    private static final String LISTA_USUARIOS_ENDPOINT = "/users";
-    private static final String CRIA_USUARIO_ENDPOINT = "/user";
+public class UserTest extends BaseTest{
+    private static final String LIST_USERS_ENDPOINT = "/users";
+    private static final String CREATE_USER_ENDPOINT = "/user";
 
     @Test
-    public void testDadosDoUsuario() {
+    public void testShowSpecificPage() {
         given().params("page", "2").
         when().
-                get(LISTA_USUARIOS_ENDPOINT).
+                get(LIST_USERS_ENDPOINT).
         then().
                 statusCode(HttpStatus.SC_OK).
                 body("page", is(2)).
                 body("data", is(notNullValue()));
     }
     @Test
-    public void testCriarUsuario(){
-        Usuario usuario = new Usuario("diogo", "QA","diogo@gmai.com");
+    public void testCreateUserSuccessfully(){
+        User user = new User("diogo", "QA","diogo@gmai.com");
         given().
                 contentType(ContentType.JSON).
-                body(usuario).
+                body(user).
         when().
-                post(CRIA_USUARIO_ENDPOINT).
+                post(CREATE_USER_ENDPOINT).
         then().
                 statusCode(HttpStatus.SC_CREATED).
                 body("name", is("diogo"));

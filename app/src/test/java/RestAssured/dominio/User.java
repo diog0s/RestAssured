@@ -1,15 +1,15 @@
 package RestAssured.dominio;
 
-public class Usuario {
+public class User {
     private String name;
     private String job;
     private String email;
 
-    public Usuario(){
+    public User(){
 
     }
 
-    public Usuario(String name, String job, String email){
+    public User(String name, String job, String email){
         this.job = job;
         this.name = name;
         this.email = email;
