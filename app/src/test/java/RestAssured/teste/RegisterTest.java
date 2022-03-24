@@ -13,7 +13,7 @@ public class RegisterTest extends BaseTest{
 
 
     @Test
-    public void testNaoEfetuaRegistroQaundoSenhaEstaFaltando() {
+    public void testNotEffectRegisterWhenWithoutPassword() {
         User user = new User();
         user.setEmail("diogo@gmai.com");
         given().
