@@ -10,15 +10,8 @@ import org.junit.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.core.Is.is;
 
-public class RegistroTest {
-    @BeforeClass
-    public static void setup(){
-        //Mostrar detalhes quando o test falhar
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        //Caminhos base para acesso a API
-        baseURI = "https://reqres.in";
-        basePath = "/api";
-    }
+public class RegistroTest extends BaseTest{
+
 
     @Test
     public void testNaoEfetuaRegistroQaundoSenhaEstaFaltando() {

@@ -14,15 +14,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-public class UsuarioTeste {
-    @BeforeClass
-    public static void setup(){
-        //Mostrar detalhes quando o test falhar
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        //Caminhos base para acesso a API
-        baseURI = "https://reqres.in";
-        basePath = "/api";
-    }
+public class UsuarioTeste extends BaseTest{
+
     @Test
     public void testDadosDoUsuario() {
         given().params("page", "2").
